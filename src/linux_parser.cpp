@@ -295,7 +295,7 @@ long LinuxParser::UpTime(int pid) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       for (int i = 1; i < 23; i++) linestream >> var;  // 22nd value
-      return stol(var) / sysconf(_SC_CLK_TCK);
+      return LinuxParser::UpTime() - stol(var) / sysconf(_SC_CLK_TCK);
     }
   }
   return -1;
